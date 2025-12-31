@@ -74,7 +74,9 @@ echo "[5/7] Checking API keys..."
 MISSING_KEYS=0
 
 if [ -f "cookbook/demo/.env" ]; then
+    set -a
     source cookbook/demo/.env
+    set +a
 fi
 
 if [ -z "$ANTHROPIC_API_KEY" ]; then

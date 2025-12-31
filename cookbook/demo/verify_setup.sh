@@ -79,7 +79,9 @@ echo ""
 echo "[6/8] Checking API key configuration..."
 if [ -f "cookbook/demo/.env" ]; then
     echo "  ✅ .env file exists"
+    set -a
     source cookbook/demo/.env
+    set +a
     if [ ! -z "$ANTHROPIC_API_KEY" ]; then
         echo "  ✅ ANTHROPIC_API_KEY is set"
     else

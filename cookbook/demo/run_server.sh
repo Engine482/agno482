@@ -10,7 +10,9 @@ cd "$REPO_ROOT"
 # Load environment variables from .env if it exists
 if [ -f "cookbook/demo/.env" ]; then
     echo "Loading environment variables from cookbook/demo/.env..."
-    export $(grep -v '^#' cookbook/demo/.env | xargs)
+    set -a
+    source cookbook/demo/.env
+    set +a
 fi
 
 # Check if virtual environment is activated

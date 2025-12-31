@@ -105,10 +105,10 @@ echo ""
 echo "[7/8] Checking key dependencies..."
 PACKAGES=("fastapi" "uvicorn" "anthropic" "openai" "psycopg" "pgvector")
 for package in "${PACKAGES[@]}"; do
-    if python -c "import $package" 2>/dev/null; then
-        echo "  ✅ $package"
+    if python -c "import ${package}" 2>/dev/null; then
+        echo "  ✅ ${package}"
     else
-        echo "  ❌ $package not found"
+        echo "  ❌ ${package} not found"
         ERRORS=$((ERRORS + 1))
     fi
 done

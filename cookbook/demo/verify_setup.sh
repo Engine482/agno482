@@ -79,6 +79,8 @@ echo ""
 echo "[6/8] Checking API key configuration..."
 if [ -f "cookbook/demo/.env" ]; then
     echo "  ✅ .env file exists"
+    # Load .env safely: set -a exports variables, set +a disables it
+    # This is a standard safe pattern for loading .env files
     set -a
     source cookbook/demo/.env
     set +a

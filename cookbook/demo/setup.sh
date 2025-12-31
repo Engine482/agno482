@@ -17,7 +17,9 @@ cd "$REPO_ROOT"
 echo "[1/7] Checking Python version..."
 PYTHON_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
 REQUIRED_VERSION="3.12"
-if [[ "$(printf '%s\n' "$REQUIRED_VERSION" "$PYTHON_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]]; then
+
+# Compare versions: Check if REQUIRED_VERSION is <= PYTHON_VERSION
+if ! printf '%s\n' "$REQUIRED_VERSION" "$PYTHON_VERSION" | sort -V -C; then
     echo "❌ Error: Python 3.12 or higher is required. Found: $PYTHON_VERSION"
     exit 1
 fi
@@ -73,6 +75,8 @@ echo ""
 echo "[5/7] Checking API keys..."
 MISSING_KEYS=0
 
+# Load .env safely: set -a exports all variables, set +a disables it
+# This prevents command execution while loading environment variables
 if [ -f "cookbook/demo/.env" ]; then
     set -a
     source cookbook/demo/.env

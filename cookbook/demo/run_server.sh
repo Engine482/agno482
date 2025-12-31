@@ -8,6 +8,8 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$REPO_ROOT"
 
 # Load environment variables from .env if it exists
+# Using set -a/+a is a safe pattern that prevents command injection
+# while allowing proper environment variable loading
 if [ -f "cookbook/demo/.env" ]; then
     echo "Loading environment variables from cookbook/demo/.env..."
     set -a

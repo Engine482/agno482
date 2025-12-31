@@ -39,7 +39,10 @@ echo "[3/7] Installing dependencies..."
 source .demoenv/bin/activate
 pip install --upgrade pip -q
 pip install -r cookbook/demo/requirements.txt -q
-echo "✓ Dependencies installed"
+# Install local agno development version
+pip uninstall -y agno -q 2>/dev/null || true
+pip install -e libs/agno/ -q
+echo "✓ Dependencies installed (using local agno v2.2.9)"
 echo ""
 
 # Step 4: Check Docker and PostgreSQL
